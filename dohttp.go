@@ -9,9 +9,7 @@ import (
 	"time"
 )
 
-var (
-	myHTTPClient *http.Client
-)
+var myHTTPClient *http.Client
 
 const (
 	defaultDialTimeout = 2 * time.Second
@@ -48,6 +46,7 @@ func doRequest(ctx context.Context, callMethod string, endPoint string, header m
 		}
 	}
 	req = req.WithContext(ctx)
+	req.Close = true
 	// use myHttpClient to send request
 	response, err := myHTTPClient.Do(req)
 	if err != nil {
